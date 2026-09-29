@@ -21,8 +21,9 @@ def get_validint_within_range(min:int, max:int, target:int, userguess:str) -> in
         if userguess.isdigit() != True:
             print("Not a valid guess.")
             userguess = getvalidint(7)
+        else:
             userguess = int(userguess)
-        elif min > userguess and userguess > max:
+        if min > userguess and userguess > max:
             print("Not a valid guess.")
             userguess = getvalidint(8)
             userguess = int(userguess)
