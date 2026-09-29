@@ -28,7 +28,7 @@ def get_validint_within_range(min:int, max:int, target:int, userguess:str) -> in
             userguess = getvalidint(8)
             userguess = int(userguess)
         else:
-            return userguess
+            return user.append(userguess)
     else:
         min = getvalidint(5)
         max = getvalidint(6)
@@ -36,7 +36,16 @@ def get_validint_within_range(min:int, max:int, target:int, userguess:str) -> in
 def playUserrounds(min:int, max:int, target:int, userguess:int) -> int:
     """Repeatedly calls get_valid_int_within_range and stores the guesses in a list, until the guess == the target.
     Then returns the list, Provides messaging after each guess (correct, too high, too low)"""
-    get_validint_within_range(min, max, target, userguess)
+    while userguess.count(target) != True:
+        get_validint_within_range(min, max, target, userguess)
+        index = 0
+        if userguess[index] < target:
+            print("Too low of a guess.")
+        elif userguess[index > target]:
+            print("Too high of a guess.")
+        else:
+            print("You found the number!")
+        index += 1
 
 def playCMProunds(min:int, max:int, target:int) -> int:
     """Repeatedly binary search logic to find the target number.
@@ -54,7 +63,10 @@ def playagain() -> bool:
     if userinput == "y":
         return userinput
     else:
-        None
+        if userinput != "n":
+            print("Invalid input.")
+        else:
+            None
 
 
 min1 = getvalidint(1)
