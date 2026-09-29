@@ -36,26 +36,39 @@ def get_validint_within_range(min:int, max:int, target:int, userguess:str) -> in
 def playUserrounds(min:int, max:int, target:int, userguess:int) -> int:
     """Repeatedly calls get_valid_int_within_range and stores the guesses in a list, until the guess == the target.
     Then returns the list, Provides messaging after each guess (correct, too high, too low)"""
+    index = 0
     while userguess.count(target) != True:
         get_validint_within_range(min, max, target, userguess)
-        index = 0
         if userguess[index] < target:
             print("Too low of a guess.")
-        elif userguess[index > target]:
+        else:
+            if userguess[index > target]:
+                print("Too high of a guess.")
+            else:
+                print("You found the number!")
+        index += 1
+    index = index + 1
+    return index
+
+def playCMProunds(min:int, max:int, target:int, cmpguess) -> int:
+    """Repeatedly binary search logic to find the target number.
+    Each Guess is stored in a list. Math used to generate guess is printed.
+    List of guesses returned."""
+    index = 0
+    while cmpguess.count(target) != True:
+        if cmpguess[index] < target:
+            print("Too low of a guess.")
+        elif cmpguess[index > target]:
             print("Too high of a guess.")
         else:
             print("You found the number!")
         index += 1
-
-def playCMProunds(min:int, max:int, target:int) -> int:
-    """Repeatedly binary search logic to find the target number.
-    Each Guess is stored in a list. Math used to generate guess is printed.
-    List of guesses returned."""
-    print()
+    index = index + 1
+    return index
 
 def printoutcome(userrounds: list, cmprounds: list) -> str:
     """Print a report showing the guesses for each, determines the winner."""
-    print()
+    print(f"You guessed {userrounds} time(s), and the computer took {cmprounds} guess(es).")
 
 def playagain() -> bool:
     """Repeatedly asks the user of they wish to play again until a valid response is given. Returns true if they want to play again, otherwise false."""
@@ -73,10 +86,11 @@ min1 = getvalidint(1)
 max1 = getvalidint(2)
 target1 = random.randint(min1, max1)
 user = []
+cmp = []
 
 while True:
    userGuesses = playUserrounds(min1, max1, target1, user)
-   compGuesses = playCMProunds(min1, max1, target1)
+   compGuesses = playCMProunds(min1, max1, target1, cmp)
    printoutcome(userGuesses, compGuesses)
    if playagain() == "y":
        target = random.randint
