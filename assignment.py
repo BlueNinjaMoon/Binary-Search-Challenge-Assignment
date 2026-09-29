@@ -18,9 +18,14 @@ def get_validint_within_range(min:int, max:int, target:int, userguess:str) -> in
         max = getvalidint(4)
     if min < target and target < max:
         userguess = input(f"Enter a guess of a number between {min} and {max}: ")
-        if userguess.isdigit() != True or min < userguess and userguess < max:
+        if userguess.isdigit() != True:
             print("Not a valid guess.")
-            getvalidint(7)
+            userguess = getvalidint(7)
+            userguess = int(userguess)
+        elif min > userguess and userguess > max:
+            print("Not a valid guess.")
+            userguess = getvalidint(8)
+            userguess = int(userguess)
         else:
             return userguess
     else:
@@ -44,7 +49,12 @@ def printoutcome(userrounds: list, cmprounds: list) -> str:
 
 def playagain() -> bool:
     """Repeatedly asks the user of they wish to play again until a valid response is given. Returns true if they want to play again, otherwise false."""
-    print()
+    userinput = input("Do you wish to play again? (Y/y for yes, N/n for no.): ").strip().lower()
+    if userinput == "y":
+        return userinput
+    else:
+        None
+
 
 min1 = getvalidint(1)
 max1 = getvalidint(2)
@@ -55,7 +65,7 @@ while True:
    userGuesses = playUserrounds(min1, max1, target1, user)
    compGuesses = playCMProunds(min1, max1, target1)
    printoutcome(userGuesses, compGuesses)
-   if playagain():
+   if playagain() == "y":
        target = random.randint
    else:
         print("Have a good day!")
