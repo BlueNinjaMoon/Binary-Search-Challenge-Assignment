@@ -36,35 +36,33 @@ def get_validint_within_range(min:int, max:int, target:int, userguess:str) -> in
 def playUserrounds(min:int, max:int, target:int, userguess:int) -> int:
     """Repeatedly calls get_valid_int_within_range and stores the guesses in a list, until the guess == the target.
     Then returns the list, Provides messaging after each guess (correct, too high, too low)"""
-    index = 0
+    userindex = 0
+    print("-User Round Start-")
     while userguess.count(target) != True:
         get_validint_within_range(min, max, target, userguess)
-        if userguess[index] < target:
+        if userguess[userindex] < target:
             print("Too low of a guess.")
         else:
-            if userguess[index > target]:
+            if userguess[userindex > target]:
                 print("Too high of a guess.")
             else:
                 print("You found the number!")
-        index += 1
-    index = index + 1
-    return index
+        userindex += 1
+    userindex = userindex + 1
+    return userindex
 
 def playCMProunds(min:int, max:int, target:int, cmpguess) -> int:
     """Repeatedly binary search logic to find the target number.
     Each Guess is stored in a list. Math used to generate guess is printed.
     List of guesses returned."""
-    index = 0
+    print("-Computer Round Start-")
+    cmpindex = 0
     while cmpguess.count(target) != True:
-        if cmpguess[index] < target:
-            print("Too low of a guess.")
-        elif cmpguess[index > target]:
-            print("Too high of a guess.")
-        else:
-            print("You found the number!")
-        index += 1
-    index = index + 1
-    return index
+        
+        cmp.append(cmpguess)
+        cmpindex += 1
+    cmpindex = cmpindex + 1
+    return cmpindex
 
 def printoutcome(userrounds: list, cmprounds: list) -> str:
     """Print a report showing the guesses for each, determines the winner."""
