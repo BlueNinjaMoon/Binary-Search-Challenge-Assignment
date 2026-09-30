@@ -2,13 +2,13 @@ import random
 
 def getvalidint(string: str) -> int:
     """Prompts the user repeatedly until a valid int is given.""" 
-    validint = input("Enter a number: ")
+    validint = input(string)
     while validint.isdigit() == False:
         print("That is not a valid number. Try again.") 
-        validint = input("Enter a number: ")
+        validint = input(string)
     validint = int(validint)
-    string = validint
-    return string
+
+    return validint
 
 def get_validint_within_range(min:int, max:int, target:int, userguess:str) -> int:
     """Repeatedly calls getvalidint until an int withing valid range is given."""
@@ -37,7 +37,6 @@ def playUserrounds(min:int, max:int, target:int, userguess:int) -> int:
     """Repeatedly calls get_valid_int_within_range and stores the guesses in a list, until the guess == the target.
     Then returns the list, Provides messaging after each guess (correct, too high, too low)"""
     userindex = 0
-    print(target1)
     while userguess.count(target) != True:
         get_validint_within_range(min, max, target, userguess)
         if userguess[userindex] < target:
@@ -84,8 +83,8 @@ def playagain() -> bool:
     """Repeatedly asks the user of they wish to play again until a valid response is given. Returns true if they want to play again, otherwise false."""
     userinput = input("Do you wish to play again? (Y/y for yes, N/n for no.): ").strip().lower()
     if userinput == "y":
-        user.clear
-        cmp.clear
+        user.clear()
+        cmp.clear()
         return userinput
     else:
         if userinput != "n":
@@ -93,8 +92,8 @@ def playagain() -> bool:
         else:
             None
 
-min1 = getvalidint(1)
-max1 = getvalidint(2)
+min1 = getvalidint("Enter the minimum number: ")
+max1 = getvalidint("Enter the maximum number: ")
 target1 = random.randint(min1, max1)
 user = []
 cmp = []
@@ -104,7 +103,7 @@ while True:
    compGuesses = playCMProunds(min1, max1, target1, cmp)
    printoutcome(userGuesses, compGuesses)
    if playagain() == "y":
-       target = random.randint
+       target = random.randint(min1, max1)
    else:
         print("Have a good day!")
         break
