@@ -37,7 +37,7 @@ def playUserrounds(min:int, max:int, target:int, userguess:int) -> int:
     """Repeatedly calls get_valid_int_within_range and stores the guesses in a list, until the guess == the target.
     Then returns the list, Provides messaging after each guess (correct, too high, too low)"""
     userindex = 0
-    print("-User Round Start-")
+    print(target1)
     while userguess.count(target) != True:
         get_validint_within_range(min, max, target, userguess)
         if userguess[userindex] < target:
@@ -46,8 +46,9 @@ def playUserrounds(min:int, max:int, target:int, userguess:int) -> int:
             if userguess[userindex > target]:
                 print("Too high of a guess.")
             else:
-                print("You found the number!")
+                None
         userindex += 1
+    print("You found the number!")
     userindex = userindex + 1
     return userindex
 
@@ -55,10 +56,21 @@ def playCMProunds(min:int, max:int, target:int, cmpguess) -> int:
     """Repeatedly binary search logic to find the target number.
     Each Guess is stored in a list. Math used to generate guess is printed.
     List of guesses returned."""
-    print("-Computer Round Start-")
     cmpindex = 0
     while cmpguess.count(target) != True:
-        
+        middle = (min+max)//2
+        print(f"Low {min} High {max} Middle Guess {middle}")
+        if middle < target:
+            print("Too low.")
+            min = middle
+        elif middle > target:
+            print("Too high.")
+            max = middle
+        elif middle == target:
+            print("Found target number.")
+            break
+        else:
+            break
         cmp.append(cmpguess)
         cmpindex += 1
     cmpindex = cmpindex + 1
@@ -72,13 +84,14 @@ def playagain() -> bool:
     """Repeatedly asks the user of they wish to play again until a valid response is given. Returns true if they want to play again, otherwise false."""
     userinput = input("Do you wish to play again? (Y/y for yes, N/n for no.): ").strip().lower()
     if userinput == "y":
+        user.clear
+        cmp.clear
         return userinput
     else:
         if userinput != "n":
             print("Invalid input.")
         else:
             None
-
 
 min1 = getvalidint(1)
 max1 = getvalidint(2)
